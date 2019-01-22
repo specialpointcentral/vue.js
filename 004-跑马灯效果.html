@@ -18,27 +18,25 @@
 </body>
 <script>
     // 实例化vue对象
-    let vm = new Vue({
+    var vm = new Vue({
         // 绑定对象
         el: '#app',
         data: {
-            msg: '你好，少航，http://shaohang.xin',
-            myInterval: null
+            msg: 'Hello_world!',
+            intervalId: null
         },
         methods: {
             start: function () {
                 console.log("跑起来")
                 // 如果已经定义，则不再向下执行
-                if (this.myInterval) {
-                    return
-                }
-                // 如果不使用箭头函数需要写let this = this
-                // 定义定时器
-                this.myInterval = setInterval(() => {
+                if (this.intervalId) return
+                // 如果不使用箭头函数需要写var _this = this
+                // 定义定时器，() => {} ES6写法
+                this.intervalId = setInterval( () => {
                     // 获取第一个字符
-                    let start = this.msg.substring(0, 1)
+                    var start = this.msg.substring(0, 1)
                     // 获取剩下的字符
-                    let end = this.msg.substring(1)
+                    var end = this.msg.substring(1)
                     // 重新拼凑字符串
                     this.msg = end + start
                 }, 100)
@@ -47,11 +45,21 @@
             stop() {
                 console.log("停下来")
                 // 清除定时器
-                clearInterval(this.myInterval)
-                this.myInterval = null
+                clearInterval(this.intervalId)
+                this.intervalId = null
             }
         }
     })
 </script>
 
 </html>
+<!--
+    1.
+    在 VM 实例中，如果要获取 data 上的数据或者要调用 methods 中的方法
+    必须通过 this.数据属性名或者 this.方法名来访问，这里的 this 就表示我们 new 出来的 VM 实例
+    
+    2.
+    ES6写法：
+    ·stop: function(){} => stop(){}
+    ·setInterval( function(){} ) => setInterval( () => {} )
+-->
