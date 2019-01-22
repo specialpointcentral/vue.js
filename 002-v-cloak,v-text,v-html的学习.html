@@ -1,6 +1,16 @@
+<!--
+    v-cloak 
+        在 vue.js instance ready 之后，v-cloak 属性会被自动去除
+        多用于解决插值表达式闪烁问题
+    v-text
+        类似于插值表达式，用于更新元素的 textContent。
+        v-text 会覆盖元素中原本的内容，插值表达式只会替代自己的占位符，不是完全覆盖
+    v-html
+        更新元素的 innerHTML。
+        不同于 v-text ，v-html 将内容按普通 HTML 插入，不会作为 Vue 模板进行编译
+-->
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -42,14 +52,3 @@
     })
 </script>
 </html>
-<!--
-    v-cloak 
-        在 vue.js instance ready 之后，v-cloak 属性会被自动去除
-        多用于解决插值表达式闪烁问题
-    v-text
-        类似于插值表达式，用于更新元素的 textContent。
-        v-text 会覆盖元素中原本的内容，插值表达式只会替代自己的占位符，不是完全覆盖
-    v-html
-        更新元素的 innerHTML。
-        不同于 v-text ，v-html 将内容按普通 HTML 插入，不会作为 Vue 模板进行编译
--->

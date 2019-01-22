@@ -1,6 +1,15 @@
+<!--
+    1.
+    在 VM 实例中，如果要获取 data 上的数据或者要调用 methods 中的方法
+    必须通过 this.数据属性名或者 this.方法名来访问，这里的 this 就表示我们 new 出来的 VM 实例
+    
+    2.
+    ES6写法：
+    ·stop: function(){} => stop(){}
+    ·setInterval( function(){} ) => setInterval( () => {} )
+-->
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset='utf-8'>
     <title></title>
@@ -53,13 +62,3 @@
 </script>
 
 </html>
-<!--
-    1.
-    在 VM 实例中，如果要获取 data 上的数据或者要调用 methods 中的方法
-    必须通过 this.数据属性名或者 this.方法名来访问，这里的 this 就表示我们 new 出来的 VM 实例
-    
-    2.
-    ES6写法：
-    ·stop: function(){} => stop(){}
-    ·setInterval( function(){} ) => setInterval( () => {} )
--->
