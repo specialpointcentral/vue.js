@@ -1,48 +1,93 @@
+<!--
+    1. 循环简单数组
+        v-for="(item,index) in list" 
+        索引：{{index}} -- 值：{{item}}
+    2. 循环对象数组
+        v-for="(user, index) in list"
+        索引：{{index}} -- id:{{user.id}} -- name:{{user.name}}
+    3. 遍历对象
+        v-for="(value, key, index) in Object"
+        索引：{{index}} -- {{key}}:{{value}}
+    4. 迭代数字，从 1 开始
+        v-for="count in 10"
+        第{{count}}次循环
+
+    在2.2.0+的版本里面，当在组件里使用 v-for 必须加 key
+    未指定 key 导致每次添加后 key 可能会改变
+    key 属性只能用 number/string ，并且用 v-bind 的方式绑定
+
+-->
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset='utf-8'>
-        <title></title>
-        <!-- 引入vue.js -->
-        <script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js'></script>
-    </head>
-    <body>
-        <div id='app'>
-            <!-- 循环简单数组 -->
-            <p v-for="(item,index) in list">索引：{{index}} -- 值：{{item}}</p><hr>
-            <!-- 循环对象数组 -->
-            <p v-for="user in list2">id:{{user.id}}--name:{{user.name}}</p><hr>
-            <!-- 遍历对象 -->
-            <p v-for="(val,key) in user">{{key}}:{{val}}</p><hr>
 
-            <!-- 迭代数字 -->
-            <p v-for="count in 10">这是第{{count}}次循环</p><hr>
+<head>
+    <meta charset='utf-8'>
+    <title></title>
+    <!-- 引入vue.js -->
+    <script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js'></script>
+</head>
 
-            <!-- 在2.2.0+的版本里面，当在组件找那个使用v-for必须加v-key -->
+<body>
+    <div id='app'>
+        <!-- 循环简单数组 -->
+        <p v-for="(item, index) in list">索引：{{index}} -- 值：{{item}}</p>
+        <hr>
+        <!-- 循环对象数组 -->
+        <p v-for="(user, index) in list2">索引：{{index}} -- id:{{user.id}} -- name:{{user.name}}</p>
+        <hr>
+        <!-- 遍历对象 -->
+        <p v-for="(val, key, index) in user">索引：{{index}} -- {{key}}:{{val}}</p>
+        <hr>
+
+        <!-- 迭代数字，从 1 开始 -->
+        <p v-for="count in 10">这是第{{count}}次循环</p>
+        <hr>
+
+        <!-- 在2.2.0+的版本里面，当在组件里使用 v-for 必须加 key -->
+
+        <!-- 未指定 key 导致每次添加后 key 可能会改变 -->
+        <!-- key 属性只能用 number/string ，并且用 v-bind 的方式绑定 -->
+        <p v-for="item in list2" :key="item.id"><input type="checkbox">{{item.id}} -- {{item.name}}</p>
+        <div>
+            <label>
+                ID:
+                <input type="text" v-model="id">
+            </label>
+            <label>
+                name:
+                <input type="text" v-model="name">
+            </label>
+            <input type="button" value="submit" @click="add">
         </div>
-    
-    </body>
-    <script>
-        // 实例化vue对象
-        let vm = new Vue({
-            // 绑定对象
-            el:'#app',
-            data:{
-                list:[1,2,3,4,5,6],
-                list2:[
-                    {id:1,name:'zhangsan'},
-                    {id:2,name:'lisi'},
-                    {id:3,name:'wangwu'}
-                ],
-                user:{
-                    id:1,
-                    user:'shaohang',
-                    age:20
-                }
-            },
-            methods:{
-                
+    </div>
+
+</body>
+<script>
+    // 实例化vue对象
+    let vm = new Vue({
+        // 绑定对象
+        el: '#app',
+        data: {
+            id: '',
+            name: '',
+            list: [1, 2, 3, 4, 5, 6],
+            list2: [
+                { id: 1, name: 'zhangsan' },
+                { id: 2, name: 'lisi' },
+                { id: 3, name: 'wangwu' }
+            ],
+            user: {
+                id: 1,
+                user: 'shaohang',
+                age: 20
             }
-        })
-    </script>
+        },
+        methods: {
+            add() {
+                this.list2.unshift({ id: this.id, name: this.name });
+            }
+        }
+    })
+</script>
+
 </html>
