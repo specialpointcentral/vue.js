@@ -18,8 +18,8 @@
         <div id='app'>
             <input type="button" value="快到碗里来" @click="flag = !flag">
             <transition 
-                v-on:before-enter="brforeEnter"
-                v-on:enter="enter"
+                @before-enter="brforeEnter"
+                @enter="enter"
                 @after-enter="afterEnter"
             >
                 <div class="ball" v-if="flag"></div>
@@ -43,7 +43,7 @@
                 },
                 enter(el,done){
                     // 表示动画 开始之后的样式，这里，可以设置小球完成动画之后的样式，结束状态
-                    el.offsetWidth //得写这个，会强制动画刷新
+                    el.offsetHeight //得写这个，会强制动画刷新
                     el.style.transform = "translate(150px,450px)"
                     el.style.transition = 'all 1s ease' 
 

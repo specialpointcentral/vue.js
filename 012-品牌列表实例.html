@@ -101,12 +101,12 @@
 
 
         // 自定义全局指令
-        // 
+        // 定义的时候直接定义，调用的时候必须要加 v- 前缀调用
         Vue.directive('focus',{
             bind:function(el){
                 // 在每个函数中，第一个参数永远是el，表示被绑定了指令的那个元素，这个el参数是一个原生的JS对象
                 // el.focus()  该操作不生效，时机不对
-            },  //每当指令绑定到元素上的时候，会立刻执行这个 bind 函数，智慧执行一次
+            },  // 每当指令绑定到元素上的时候，会立刻执行这个 bind 函数，智慧执行一次
             inserted:function(el){
                 el.focus()
             },  //inserted表示元素 插入到DOM中的时候，会执行 inserted 函数【触发一次】
@@ -116,7 +116,7 @@
             bind:function(el,binding){
                 console.log(binding)
                 el.style.color = binding.value
-            },  //每当指令绑定到元素上的时候，会立刻执行这个 bind 函数，智慧执行一次
+            },  //每当指令绑定到元素上的时候，会立刻执行这个 bind 函数，只会执行一次
         })
 
         // 实例化vue对象
@@ -188,6 +188,7 @@
                 dataFormat:function(datastr,pattern=''){
                     let data = new Date(datastr)
                     let year = data.getFullYear()
+                    //需要在前面补0，String.padStart(2,'0')，2位，不足前面补0
                     let month = (data.getMonth() + 1).toString().padStart(2,'0')
                     let day = data.getDate().toString().padStart(2,'0')
                     let hour = data.getHours().toString().padStart(2,'0')
@@ -199,6 +200,18 @@
                     }else{
                         return `${year}-${month}-${day} ${hour}:${minute}:${second}`
                     }
+                }
+            },
+            //私有的指令
+            directives:{
+                'fontweight':{
+                    bind:function(el,binding){
+                        console.log(binding)
+                        el.style.fontWeight = binding.value
+                    },  //每当指令绑定到元素上的时候，会立刻执行这个 bind 函数，只会执行一次
+                },
+                'fontsize': function(el,binding){ //简写，代码写到 bind 和 update 中去
+                    el.style.fontSize= parseInt(binding.value) + 'px'
                 }
             }
         })
